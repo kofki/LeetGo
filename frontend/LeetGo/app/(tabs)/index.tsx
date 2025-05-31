@@ -7,6 +7,15 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+
+import {
+  Button,
+  ButtonText,
+  ButtonSpinner,
+  ButtonIcon,
+  ButtonGroup,
+} from '@/components/ui/button';
+
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
@@ -26,6 +35,9 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
+        <Button size="md" variant="solid" action="primary">
+      <ButtonText>Hello World!</ButtonText>
+      </Button>
       </ThemedView>
     </ParallaxScrollView>
   );
