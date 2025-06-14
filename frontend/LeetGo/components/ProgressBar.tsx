@@ -18,14 +18,21 @@ export const ProgressBar = () => {
             </TouchableOpacity>
             <View style={styles.progressBar} />
             <Text style={styles.hearts}>❤️ 5</Text>
-            <Modal visible={modalVisible} transparent={true} animationType="slide" onRequestClose={() => setModalVisible(false)}>
-                    <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <View style={{padding: 20, backgroundColor: 'black', borderRadius: 10, height: 200, width: '100%' }}>
+            <Modal visible={modalVisible} transparent={true} animationType="fade" onRequestClose={() => setModalVisible(false)}>
+                    <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                        <Modal transparent={true} visible={modalVisible} animationType="slide" onRequestClose={() => setModalVisible(false)}>
+                            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+                        <View style={{padding: 20, backgroundColor: 'darkgrey', borderRadius: 10, height: 230, width: '100%'}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, color: 'white' }}>Are you sure you want to leave?</Text>
-                            <TouchableOpacity onPress={handleExit} style={{ marginTop: 20, backgroundColor: 'red', padding: 10, borderRadius: 5 }}>
-                                <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>Leave</Text>
+                            <TouchableOpacity onPress={()=>setModalVisible(false)} style={{ marginTop: 20, backgroundColor: 'lightgreen', padding: 10, borderRadius: 5 }}>
+                                <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>Continue</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={handleExit} style={{ marginTop: 10, padding: 10, borderRadius: 5 }}>
+                                <Text style={{ color: 'red', textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>Exit</Text>
+                                </TouchableOpacity>
                         </View>
+                        </View>
+                        </Modal>
                 </View>
             </Modal>
         </View>
