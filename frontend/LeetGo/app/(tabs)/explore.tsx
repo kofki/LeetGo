@@ -1,15 +1,32 @@
 import { ThemedView } from '@/components/ThemedView';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Touchable } from 'react-native';
 import React, { useState } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function TabTwoScreen() {
+  const router = useRouter();
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   
   const words= ['car', 'racecar', 'LeetGo', 'cat'];
+  const handleSubmit = () => {
+    if (selectedWord === 'racecar') {
+      alert('Correct! "racecar" is a palindrome.');
+    } else {
+      alert('Incorrect. Try again!');
+    }
+    setSelectedWord(null); // Reset selection after submission
+  }
+  const handleExit = () => {
+    alert('Exiting the game...');
+    router.dismissAll();
+  }
 
   return (
     <ThemedView style={styles.container}>
       <View style={[styles.progressContainer]}>
+              <TouchableOpacity onPress={()=> handleExit()}>
+                <Text style={styles.exit}>X</Text>
+              </TouchableOpacity>
               <View style={styles.progressBar} />
               <Text style={styles.hearts}>❤️ 5</Text>
             </View>
@@ -24,7 +41,7 @@ export default function TabTwoScreen() {
                         );
                     }}
                       keyExtractor={(item) => item}/>
-            <TouchableOpacity style={styles.checkButton} onPress={()=> console.log(`Selected word: ${selectedWord}`)}>
+            <TouchableOpacity style={styles.checkButton} onPress={()=> handleSubmit()}>
                     <Text style={styles.checkButtonText}>CHECK</Text>
             </TouchableOpacity>
     </ThemedView>
@@ -41,13 +58,17 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   progressBar: {
-    marginLeft: 45,
+    marginLeft: 10,
     marginRight: 10,
-    marginBottom: 20,
     width: 275,
     height: 20,
     backgroundColor: '#1ae617',
     borderRadius: 20,
+  },
+  exit: {
+    fontSize: 20,
+    color: 'grey',
+    fontWeight: 'bold',
   },
   hearts: { fontSize: 16, color: 'white' },
   instruction: {  fontSize: 18, fontWeight: 'bold', marginVertical: 10, color: 'white' },
@@ -69,11 +90,11 @@ const styles = StyleSheet.create({
   },
 
   checkButton: {
-    marginTop: 20,
     backgroundColor: 'lightgreen',
     paddingVertical: 12,
     borderRadius: 6,
     alignItems: 'center',
+    marginBottom: 100,
   },
   checkButtonText: {
     fontWeight: 'bold',

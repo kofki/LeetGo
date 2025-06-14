@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { useRouter } from 'expo-router';
+import { ThemedView } from '@/components/ThemedView';
 
 
 const WordButton = ({ word, onPress }) => (
@@ -10,6 +12,7 @@ const WordButton = ({ word, onPress }) => (
   const wordBank = ['vas', 'a', 'buenas', 'mi', 'padre', 'dias', 'noches'];
 
   const HomeScreen = () => {
+    const router = useRouter();
     const [selectedWords, setSelectedWords] = useState([]);
     
   const handleWordPress = (word) => {
@@ -22,9 +25,15 @@ const WordButton = ({ word, onPress }) => (
     setSelectedWords(selectedWords.filter(w => w !== word));
   };
 
+  const handleSubmit = () => {
+    if (selectedWords.length === 2 && selectedWords.includes('buenas') && selectedWords.includes('noches')) {
+      router.push('/explore');
+    }
+  }
+
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       {/* Progress */}
       <View style={styles.progressContainer}>
         <View style={styles.progressBar} />
@@ -65,15 +74,15 @@ const WordButton = ({ word, onPress }) => (
 
 
       {/* Check button */}
-      <TouchableOpacity style={styles.checkButton}>
+      <TouchableOpacity style={styles.checkButton} onPress={()=>handleSubmit()}>
         <Text style={styles.checkButtonText}>CHECK</Text>
       </TouchableOpacity>
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 20, paddingTop: 70, flex: 1, backgroundColor: '#fff' },
+  container: { padding: 20, paddingTop: 70, flex: 1},
 
   progressContainer: {
     flexDirection: 'row',
@@ -91,12 +100,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#1ae617',
     borderRadius: 20,
   },
-  hearts: { fontSize: 16 },
+  hearts: { fontSize: 16, color: 'white' },
 
-  instruction: {  fontSize: 18, fontWeight: 'bold', marginVertical: 10 },
+  instruction: {  fontSize: 18, fontWeight: 'bold', marginVertical: 10, color: 'white' },
 
-  speechBubble: { flexDirection: 'row', alignItems: 'center', marginVertical: 20 },
-  speechText: { fontSize: 16, fontStyle: 'italic' },
+  speechBubble: { flexDirection: 'row', alignItems: 'center', marginVertical: 20, color: 'white' },
+  speechText: { fontSize: 16, fontStyle: 'italic', color: 'white' },
 
   translationBox: {
     minHeight: 40,
@@ -118,7 +127,7 @@ const styles = StyleSheet.create({
   },
 
   wordButton: {
-    backgroundColor: '#eee',
+    backgroundColor: 'grey',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 6,
@@ -126,6 +135,7 @@ const styles = StyleSheet.create({
   },
   wordText: {
     fontSize: 16,
+    color: 'white',
   },
 placeholderButton: {
   backgroundColor: '#ddd',
@@ -140,7 +150,7 @@ placeholderButton: {
 
   checkButton: {
     marginTop: 20,
-    backgroundColor: '#ccc',
+    backgroundColor: 'lightgreen',
     paddingVertical: 12,
     borderRadius: 6,
     alignItems: 'center',
