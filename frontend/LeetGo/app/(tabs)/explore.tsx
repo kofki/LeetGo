@@ -2,6 +2,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Touchable } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { ProgressBar } from '@/components/ProgressBar';
 
 export default function TabTwoScreen() {
   const router = useRouter();
@@ -10,26 +11,16 @@ export default function TabTwoScreen() {
   const words= ['car', 'racecar', 'LeetGo', 'cat'];
   const handleSubmit = () => {
     if (selectedWord === 'racecar') {
-      alert('Correct! "racecar" is a palindrome.');
+      router.push('/pointers')
     } else {
       alert('Incorrect. Try again!');
     }
     setSelectedWord(null); // Reset selection after submission
   }
-  const handleExit = () => {
-    alert('Exiting the game...');
-    router.dismissAll();
-  }
 
   return (
     <ThemedView style={styles.container}>
-      <View style={[styles.progressContainer]}>
-              <TouchableOpacity onPress={()=> handleExit()}>
-                <Text style={styles.exit}>X</Text>
-              </TouchableOpacity>
-              <View style={styles.progressBar} />
-              <Text style={styles.hearts}>❤️ 5</Text>
-            </View>
+        <ProgressBar/>
             <Text style={styles.instruction}>Which of these words is a palindrome?</Text>
             <FlatList data={words}
                       renderItem={({ item }) => {
@@ -50,27 +41,7 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   container: { padding: 20, paddingTop: 70, flex: 1, color: 'white'},
-  progressContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-    gap: 10,
-  },
-  progressBar: {
-    marginLeft: 10,
-    marginRight: 10,
-    width: 275,
-    height: 20,
-    backgroundColor: '#1ae617',
-    borderRadius: 20,
-  },
-  exit: {
-    fontSize: 20,
-    color: 'grey',
-    fontWeight: 'bold',
-  },
-  hearts: { fontSize: 16, color: 'white' },
+  
   instruction: {  fontSize: 18, fontWeight: 'bold', marginVertical: 10, color: 'white' },
 
   wordButton : {

@@ -27,6 +27,12 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="pointers"
+        options={{
+          title: 'Pointers',
+          headerShown: false,
+        }}/>
     </Stack>
   );
 }
