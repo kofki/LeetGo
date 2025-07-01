@@ -18,9 +18,9 @@ export const ProgressBar = () => {
             </TouchableOpacity>
             <View style={styles.progressBar} />
             <Text style={styles.hearts}>❤️ 5</Text>
-            <Modal visible={modalVisible} transparent={true} animationType="fade" onRequestClose={() => setModalVisible(false)}>
+            <Modal visible={modalVisible} transparent={true} animationType="fade">
                     <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <Modal transparent={true} visible={modalVisible} animationType="slide" onRequestClose={() => setModalVisible(false)}>
+                        <Modal transparent={true} visible={modalVisible} animationType="slide" >
                             <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
                         <View style={{padding: 20, backgroundColor: 'darkgrey', borderRadius: 10, height: 230, width: '100%'}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, color: 'white' }}>Are you sure you want to leave?</Text>

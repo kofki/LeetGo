@@ -4,79 +4,15 @@ import { useRouter } from 'expo-router';
 import { ThemedView } from '@/components/ThemedView';
 
 
-const WordButton = ({ word, onPress }) => (
-  <TouchableOpacity style={styles.wordButton} onPress={() => onPress(word)}>
-      <Text style={styles.wordText}>{word}</Text>
-    </TouchableOpacity>
-  );
-  const wordBank = ['vas', 'a', 'buenas', 'mi', 'padre', 'dias', 'noches'];
-
   const HomeScreen = () => {
     const router = useRouter();
-    const [selectedWords, setSelectedWords] = useState([]);
-    
-  const handleWordPress = (word) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-    setSelectedWords([...selectedWords, word]);
-  };
-
-  const handleSelectedWordPress = (word) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-    setSelectedWords(selectedWords.filter(w => w !== word));
-  };
-
-  const handleSubmit = () => {
-    if (selectedWords.length === 2 && selectedWords.includes('buenas') && selectedWords.includes('noches')) {
-      router.push('/explore');
-    }
-  }
-
 
   return (
     <ThemedView style={styles.container}>
-      {/* Progress */}
-      <View style={styles.progressContainer}>
-        <View style={styles.progressBar} />
-        <Text style={styles.hearts}>❤️ 5</Text>
-      </View>
-
-      <Text style={styles.instruction}>Translate this sentence</Text>
-
-      {/* Prompt */}
-      <View style={styles.speechBubble}>
-        <Text style={styles.speechText}>Good evening.</Text>
-      </View>
-
-      {/* Translation line */}
-      <View style={styles.translationBox}>
-        <View style={styles.translationLine}>
-          {selectedWords.map((word, index) => (
-            <WordButton key={index} word={word} onPress={handleSelectedWordPress} />
-          ))}
-        </View>
-      </View>
-
-      {/* Word bank */}
-      <View style={styles.wordBank}>
-        {wordBank.map((word, index) => {
-          const isSelected = selectedWords.includes(word);
-          return isSelected ? (
-            <View key={index} style={styles.placeholderButton}>
-              <Text style={styles.wordText}>{word}</Text>
-            </View>
-          ) : (
-            <WordButton key={index} word={word} onPress={handleWordPress} />
-          );
-        })}
-      </View>
-
-
-
-
-      {/* Check button */}
-      <TouchableOpacity style={styles.checkButton} onPress={()=>handleSubmit()}>
-        <Text style={styles.checkButtonText}>CHECK</Text>
+      <TouchableOpacity onPress={()=>{router.push("/explore")}}>
+        <Text>Go to next Problem</Text>
       </TouchableOpacity>
+
     </ThemedView>
   );
 };
